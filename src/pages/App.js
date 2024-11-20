@@ -12,7 +12,7 @@ import {Container} from './styles'
 function App() {
 
   const [currentRepo, setCurrentRepo] = useState(''); 
-  const [respos,setRepos] = useState([]);
+  const [repos,setRepos] = useState([]);
   
   const handleSearchRepo = async () => {
 
@@ -20,11 +20,19 @@ function App() {
     console.log(data)
 
     if(data.id) {
-      setRepos(prev => [...prev, data]);
-      setCurrentRepo("")
-      return 
+      const isExist = repos.find(repo => repo.id === data.id)
+      if (!isExist){
+        setRepos(prev => [...prev, data]);
+        setCurrentRepo("")
+        return 
+      }
     }
     alert('Repositório não encontrado')
+  }
+
+  const handleRemoveRepo = (id) => { 
+    setRepos (prev => prev.filter(repo => repo.id !==id))
+
   }
 
   return (
@@ -32,7 +40,7 @@ function App() {
       <img src={gitlogo} width={72} height={72} alt='imagem do logo do github'/>
       <Input value={currentRepo} onChange={(e) => setCurrentRepo(e.target.value)} />
       <Button onClick={handleSearchRepo}/>
-      {respos.map(repo => <ItemRepo repo ={repo}/>)} 
+      {repos.map(repo => <ItemRepo handleRemoveRepo={handleRemoveRepo} repo ={repo}/>)} 
     </Container>
   );
 }
