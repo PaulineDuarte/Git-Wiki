@@ -15,6 +15,6 @@ export const ButtonContainer = styled.button`
 
     &: hover {
     background-color:#FAFAFA40; 
-    cursor: pointer; 
+    cursor: pointer;
     }
 `

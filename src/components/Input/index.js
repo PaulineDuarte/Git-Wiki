@@ -3,10 +3,10 @@ import React from "react";
 import {InputContainer} from './styles' ; 
 
 
-function Input () {
+function Input ({value,onChage}) {
     return(
 
-        <InputContainer>
+        <InputContainer value ={value} onChange={onChage}>
           <input/>
         </InputContainer>
     )
